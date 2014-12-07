@@ -10,20 +10,21 @@ try_player_api() {
 	fi
 
 	if [[ -z $domain || -z $file || -z $filekey ]]; then
-		echo "Did not find all player.api flash vars :("
+		echo "Did not find all player.api flash vars :(" > /dev/stderr
 		return
 	fi
 
 	config=$(crl "$domain/api/player.api.php?key=$filekey&file=$file")
 	if [[ $? -gt 0 ]]; then
-		echo "Could not contact player api at '$domain/api/player.api.php?key=$filekey&file=$file'"
+		echo "Could not contact player api at
+		'$domain/api/player.api.php?key=$filekey&file=$file'" > /dev/stderr
 		return
 	fi
 
 	if [[ ${config:0:4} != "url=" ]]; then
-		echo "Bad reply from player api at"
-		echo "$domain/api/player.api.php?key=$filekey&file=$file"
-		echo $config
+		echo "Bad reply from player api at" > /dev/stderr
+		echo "$domain/api/player.api.php?key=$filekey&file=$file" > /dev/stderr
+		echo $config > /dev/stderr
 		return
 	fi
 

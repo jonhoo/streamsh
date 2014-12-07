@@ -15,12 +15,7 @@ proof-of-concept showing that in most cases simple UNIX tools can do the job.
 
 The script is invoked just with the embed URL for the video you want to play,
 and optionally a filename (without the extension) to use for the resulting
-file. By default, the video will be downloaded to the current directory, but
-you can also set `PLAY=1` in your environment to have it play using mpv
-directly.
-
-If no url can be extracted (if the site isn't supported for example), then a
-browser window will be spawned instead.
+file. If a filename is not given, the streaming video will be piped to STDOUT.
 
 The script also supports running through a SOCKS5 proxy. Just start your proxy:
 

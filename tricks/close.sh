@@ -10,7 +10,7 @@ try_close() {
 	)
 
 	if [[ -n $(echo "$content" | grep "deleted") ]]; then
-		echo "Seems this file has been deleted :'("
+		echo "Seems this file has been deleted :'(" > /dev/stderr
 		exit 2
 	fi
 
