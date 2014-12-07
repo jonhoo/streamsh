@@ -56,7 +56,7 @@ for f in "$(dirname "$(readlink -f $0)")/tricks"/*; do
 done
 
 pick() {
-	echo "$1" > .cache/tvo-previous.html
+	echo "$1" > .cache/streamsh-previous.html
 	if [[ -n $(echo "$1" | grep -E "has been (deleted|removed)") ]]; then
 		echo "The file has been removed :'("
 		exit 2
