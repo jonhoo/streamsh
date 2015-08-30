@@ -8,6 +8,7 @@ fi
 ofile=""
 if [[ -n $2 ]]; then
 	ofile="$2"
+	ofile=$(echo "$ofile" | sed 's@/@--@g')
 fi
 
 ourl="$1"
