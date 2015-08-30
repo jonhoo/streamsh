@@ -114,9 +114,9 @@ pick() {
 	fi
 }
 
-edata=$(crl "$1")
+edata=$(crl "$ourl")
 
-comp "Parsing embed page" > /dev/stderr
+comp "Parsing embed page $ourl" > /dev/stderr
 pick "$edata"
 if [[ $owned == 'true' && -z $(echo "$url" | sed 's/[a-f0-9]*//') ]]; then
 	owned='false'
