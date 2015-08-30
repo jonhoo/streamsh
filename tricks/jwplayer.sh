@@ -18,10 +18,10 @@ try_jwplayer() {
 		# extract key
 		key=$(swfdump -D "$tmp" 2>/dev/null | grep -A4 'decryptor::h1' | grep String | sed 's/.*= //' | paste -sd' ' | tr -d ' ')
 		rm "$tmp"
-		echo "$key" > .cache/prev-key
+		echo "$key" > ~/.cache/streamsh-jwfile.key
 
 		# get binary data
-		(echo -n "$url" | xxd -r -p; echo "") > .cache/prev-enc
+		(echo -n "$url" | xxd -r -p; echo "") > ~/.cache/streamsh-jwfile.aes
 
 		# decode
 		dec=$(
