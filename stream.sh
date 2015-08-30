@@ -67,6 +67,14 @@ pick() {
 		err "The file has been removed :'(" > /dev/stderr
 		exit 2
 	fi
+	if [[ -n $(echo "$1" | grep -i "not found") ]]; then
+		err "The file is gone :'(" > /dev/stderr
+		exit 2
+	fi
+	if [[ -n $(echo "$1" | grep -E "maintenance mode") ]]; then
+		err "The streaming server is unavailable" > /dev/stderr
+		exit 3
+	fi
 
 	# The very classy protection used by sockshare/putlocker
 	if [[ ! -z $(echo "$1" | grep '#propaganda') ]]; then
