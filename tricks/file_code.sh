@@ -5,8 +5,5 @@ try_file_code() {
 		echo "Seems this file has been deleted :'(" > /dev/stderr
 		exit 2
 	fi
-	if [[ -z $(echo "$content" | grep "function(p,a,c,k,e,d)" | grep "allowfullscreen") ]]; then
-		return
-	fi
 	pick "$content"
 }
