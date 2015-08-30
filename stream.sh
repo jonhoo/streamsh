@@ -17,11 +17,11 @@ title=""
 owned="false"
 ua="Mozilla/5.0 (X11; Linux x86_64; rv:42.0) Gecko/20100101 Firefox/42.0"
 
-sec() { echo -e "\e[1;34m::\e[0m\e[1m $1\e[0m"; }
-comp() { echo -e "\e[1;32m==>\e[0m\e[1m $1\e[0m"; }
-task() { echo -e "\e[1;34m  ->\e[0m\e[1m $1\e[0m"; }
-err() { echo -e "\e[1;31m==> ERROR: \e[0m\e[1m $1\e[0m"; }
-inp() { echo -en "\e[1;33m==>\e[0m\e[1m $1\e[0m"; }
+sec() { echo -e "\e[1;34m:: \e[0m\e[1m$1\e[0m"; }
+comp() { echo -e "\e[1;32m==> \e[0m\e[1m$1\e[0m"; }
+task() { echo -e "\e[1;34m  -> \e[0m\e[1m$1\e[0m"; }
+err() { echo -e "\e[1;31m==> ERROR: \e[0m\e[1m$1\e[0m"; }
+inp() { echo -en "\e[1;33m==> \e[0m\e[1m$1\e[0m"; }
 
 comp "Fetching embed page" > /dev/stderr
 
