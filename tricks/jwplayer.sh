@@ -45,8 +45,7 @@ try_jwplayer() {
 		echo "Decrypting with $cipher-$bits-$chain and key '$key'" > /dev/stderr
 		dec=$(
 			(echo -n "$url" | xxd -r -p; echo "") \
-			| base64 --wrap=0 \
-			| openssl enc -d -A -base64 -${cipher}-${bits}-${chain} -K "$key" \
+			| openssl enc -d -${cipher}-${bits}-${chain} -K "$key" \
 			2>/dev/null
 		)
 		m=$(echo "$dec" | grep :)
