@@ -37,11 +37,18 @@ fi
 crl() {
 	url="$1"
 	shift
-	if [[ -z $socks ]]; then
-		curl "$@" -L -A "$ua" -s "$url"
-	else
-		curl "$@" -L -A "$ua" --socks $socks -s "$url"
-	fi
+
+	for i in $(seq 1 3); do
+		if [[ -z $socks ]]; then
+			x=$(curl "$@" -L -A "$ua" -s "$url")
+		else
+			x=$(curl "$@" -L -A "$ua" --socks $socks -s "$url")
+		fi
+		if [[ -n "$x" ]]; then
+			echo "$x"
+			break
+		fi
+	done
 }
 
 # Convert input fields to --data-urlencode pairs
