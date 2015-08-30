@@ -8,7 +8,7 @@ try_jwplayer() {
 
 	m=$(echo "$url" | grep :)
 	if [[ -z "$m" ]]; then
-		echo "Decoding '$url'" > /dev/stderr
+		echo "Decrypting filename '$url'" > /dev/stderr
 
 		# get obc.swf which contains the key
 		obc=$(echo "$1" | sed 's/.*\(http[^"]*asproject.swf\).*/\1/' | sed 's/asproject.swf/obc.swf/')
@@ -23,7 +23,7 @@ try_jwplayer() {
 		# get binary data
 		(echo -n "$url" | xxd -r -p; echo "") > ~/.cache/streamsh-jwfile.aes
 
-		# decode
+		# decrypt
 		dec=$(
 			(echo -n "$url" | xxd -r -p; echo "") \
 			| base64 --wrap=0 \
@@ -36,7 +36,7 @@ try_jwplayer() {
 			return
 		fi
 		url="$dec"
-		echo "Decoded to $dec" > /dev/stderr
+		echo "Decrypted to $dec" > /dev/stderr
 	fi
 
 	title="unknown-series-$$"
