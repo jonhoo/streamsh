@@ -111,6 +111,10 @@ pick() {
 	elif [[ ! -z $(echo "$1" | grep 'jwplayer(') ]]; then
 		task "Extracting with jwplayer method" > /dev/stderr
 		try_jwplayer "$1"
+	# Form you have to click through maybe?
+	elif [[ ! -z $(echo "$1" | grep 'input type="hidden"') ]]; then
+		task "Bypassing form" > /dev/stderr
+		try_downloadForm "$1"
 	fi
 }
 
