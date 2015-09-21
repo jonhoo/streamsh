@@ -34,15 +34,17 @@ if [[ -n $(ss -tpln | grep ssh | grep -v ":22 ") ]]; then
 fi
 
 # Wrapper for SOCKS or non-SOCKS curl
+jar=$(mktemp /tmp/streamsh-jar-XXXXXXXXXX)
 crl() {
+	ref="$url"
 	url="$1"
 	shift
 
 	for i in $(seq 1 3); do
 		if [[ -z $socks ]]; then
-			x=$(curl "$@" -L -A "$ua" -s "$url")
+			x=$(curl "$@" -c $jar -L -e "$ref" -A "$ua" -s "$url")
 		else
-			x=$(curl "$@" -L -A "$ua" --socks $socks -s "$url")
+			x=$(curl "$@" -c $jar -L -e "$ref" -A "$ua" --socks $socks -s "$url")
 		fi
 		if [[ -n "$x" ]]; then
 			echo "$x"
@@ -125,6 +127,8 @@ pick "$edata"
 if [[ $owned == 'true' && -z $(echo "$url" | sed 's/[a-f0-9]*//') ]]; then
 	owned='false'
 fi
+
+rm "$jar"
 
 if [[ $owned == 'false' ]]; then
 	err "Found no streaming video on $ourl" > /dev/stderr
