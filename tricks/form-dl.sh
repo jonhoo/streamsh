@@ -5,6 +5,12 @@ try_downloadForm() {
 		return 0
 	fi
 
+	if (echo "$1" | grep 'Skipped countdown' >/dev/null); then
+		wait=$(echo "$1" | grep cxc | grep -v 'innerHTML' | sed -e 's/^[^0-9]*//' -e 's/[^0-9]*$//')
+		echo "  -> Need to wait for countdown ($wait secs)..." > /dev/stderr
+		sleep $wait
+	fi
+
 	# Accumulate form data
 	args=()
 
